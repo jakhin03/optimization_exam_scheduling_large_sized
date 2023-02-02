@@ -1,5 +1,6 @@
 # MiniProject: Xếp lịch thi học kỳ
 Miniproject học phần tối ưu hóa HUST-20221
+
 ## Chủ đề:
   + Có N môn 1, 2, ..., N cần được xếp lịch thi học kỳ
   + Môn i có số lượng sinh viên đăng ký là d(i)
@@ -8,3 +9,10 @@ Miniproject học phần tối ưu hóa HUST-20221
   + Mỗi ngày được chia thành 4 kíp
   + Hãy lập kế hoạch bố trí lịch và phòng cho các môn thi sao cho tổng số ngày diễn ra N môn thi là nhỏ nhất
   
+## Input:
+  + Dòng 1: ghi N
+  + Dòng 2: d[1], d[2], ..., d[N]
+  + Dòng 3: ghi M
+  + Dòng 4: c[1], c[2], ..., c[M]
+  + Dòng 5: ghi số nguyên dương K
+  + Dòng 5+k (k = 1, ..., k): ghi i và j (là 2 môn thi trùng sinh viên đăng ký -> không thể xếp trùng ngày, kíp)
