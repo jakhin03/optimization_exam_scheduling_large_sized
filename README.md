@@ -10,12 +10,11 @@ Miniproject học phần tối ưu hóa HUST-20221
   + Hãy lập kế hoạch bố trí lịch và phòng cho các môn thi sao cho tổng số ngày diễn ra N môn thi là nhỏ nhất
   
 ## Input:
-  + Dòng 1: ghi N
+  + Dòng 1: ghi N, M
   + Dòng 2: d[1], d[2], ..., d[N]
-  + Dòng 3: ghi M
-  + Dòng 4: c[1], c[2], ..., c[M]
-  + Dòng 5: ghi số nguyên dương K
-  + Dòng 5+k (k = 1, ..., k): ghi i và j (là 2 môn thi trùng sinh viên đăng ký -> không thể xếp trùng ngày, kíp)
+  + Dòng 3: c[1], c[2], ..., c[M]
+  + Dòng 4: ghi số nguyên dương K
+  + Dòng 4+k (k = 1, ..., k): ghi i và j (là 2 môn thi trùng sinh viên đăng ký -> không thể xếp trùng ngày, kíp)
 
 ## Output:
   + Dòng i (i = 1, ..., N): ghi 3 số nguyên i, s[i], r[i] (trong đó s[i] là kíp và r[i] là phòng mà môn i được xếp vào)
