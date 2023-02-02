@@ -41,7 +41,6 @@ def schedule_exams(N, D, M, C, conflicts):
                         continue
                     days[current_day][j][k] += d
                     schedule[i] = (current_day, j, k)
-                    print("Subject %d is scheduled at day %d, room %d and period %d"%(i+1, current_day+1, j+1, k+1))
                     assigned = True
                     break
             if assigned:
