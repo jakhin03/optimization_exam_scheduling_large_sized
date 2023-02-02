@@ -16,3 +16,8 @@ Miniproject học phần tối ưu hóa HUST-20221
   + Dòng 4: c[1], c[2], ..., c[M]
   + Dòng 5: ghi số nguyên dương K
   + Dòng 5+k (k = 1, ..., k): ghi i và j (là 2 môn thi trùng sinh viên đăng ký -> không thể xếp trùng ngày, kíp)
+
+## Output:
+  + Dòng i (i = 1, ..., N): ghi 3 số nguyên i, s[i], r[i] (trong đó s[i] là kíp và r[i] là phòng mà môn i được xếp vào)
+ 
+## Cấu trúc thư mục:
