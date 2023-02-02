@@ -11,7 +11,7 @@ def input_():
         conflicts.append([int(x)-1 for x in sys.stdin.readline().split()])
     return N,d,M,c,K,conflicts
 def schedule_exams(N, D, M, C, conflicts):
-    schedule = [[0]*N] * N
+    schedule = [(0,0,0) for _ in range(N)]
     days = defaultdict(lambda : [[0, 0, 0, 0] for j in range(M)])
     current_day = 0
     exclude = defaultdict(list)
@@ -34,11 +34,11 @@ def schedule_exams(N, D, M, C, conflicts):
         for room in rooms:
             c, j = room
             for k in range(4):
-                if days[current_day][j][k] + d <= c:
-                    # kiểm tra trường hợp có môn đã đăng ký
+                if (days[current_day][j][k] + d <= c) and (days[current_day][j][k] == 0):
+                    # kiểm tra trường hợp có môn đã đăng ký hoặc phòng không đủ sức chứa
                     conflict = False
                     for ii in range(i):
-                        if schedule[ii][0] == current_day and schedule[ii][1] == j and schedule[ii][2] == k:
+                        if (schedule[ii][0] == current_day and schedule[ii][2] == k) and ((ii in exclude[i]) or schedule[ii][1] == j ):
                             conflict = True
                             break
                     if conflict:
@@ -59,7 +59,7 @@ def main():
   n,d,m,c,k,conflicts = input_()
   num_days, schedule = schedule_exams(n,d,m,c, conflicts)
   for exam, (i,j,k) in enumerate(schedule):
-    print(exam+1,k+1,j+1) 
+    print(exam+1,k+1,j+1) #môn, kíp, phòng
   
 if __name__ == "__main__":
   main()
