@@ -15,15 +15,15 @@ def schedule_exams(N, D, M, C, conflicts):
     days = defaultdict(lambda : [[0, 0, 0, 0] for j in range(M)])
     current_day = 0
     
-    # sort exams by decreasing number of registered students
+    # sắp xếp các môn thi theo số lượng đăng ký giảm dần
     exams = [(d, i) for i, d in enumerate(D)]
     exams.sort(reverse=True)
     
-    # sort rooms by decreasing capacity
+    # sắp xếp các phòng thi theo sức chứa giảm dần
     rooms = [(c, j) for j, c in enumerate(C)]
     rooms.sort(reverse=True)
     
-    # assign exams to the earliest available slot
+    # gán môn thi vào kíp sớm nhất
     for exam in exams:
         d, i = exam
         assigned = False
@@ -48,7 +48,7 @@ def schedule_exams(N, D, M, C, conflicts):
         if not assigned:
             current_day += 1
     
-    # return the number of days needed
+    # trả về số ngày tối thiểu để diễn ra kì thi
     return current_day + 1, schedule
 
 def main():
