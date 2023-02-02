@@ -31,7 +31,7 @@ def schedule_exams(N, D, M, C, conflicts):
             c, j = room
             for k in range(4):
                 if days[current_day][j][k] + d <= c:
-                    # check if there is any conflict with assigned exams
+                    # kiểm tra trường hợp có môn đã đăng ký
                     conflict = False
                     for ii in range(i):
                         if schedule[ii][0] == current_day and schedule[ii][1] == j and schedule[ii][2] == k:
