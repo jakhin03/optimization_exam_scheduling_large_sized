@@ -23,7 +23,7 @@ def schedule_exams(N, D, M, C, conflicts):
     exams = [(d, i) for i, d in enumerate(D)]
     exams.sort(reverse=True)
     
-    # sắp xếp các phòng thi theo sức chứa giảm dần
+    # sắp xếp các phòng thi theo sức chứa giảm dần 
     rooms = [(c, j) for j, c in enumerate(C)]
     rooms.sort(reverse=True)
 
