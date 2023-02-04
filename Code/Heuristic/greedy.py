@@ -41,7 +41,6 @@ def schedule_exams(N, D, M, C, conflicts):
                     if conflict:
                         continue
                     days[current_day][j][k] += d
-                    print("Mon %d xep vao phong %d kip %d"%(i+1,j+1,k+1))
                     schedule[i] = (current_day, j, k)
                     break
             else:
