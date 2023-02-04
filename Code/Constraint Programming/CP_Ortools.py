@@ -61,12 +61,12 @@ class CPOrTools:
 
         #4th constraint: xep mon vao phong sao cho sinh vien ngoi du trong phong
         for i in range(self.N):
-            # self.cp_model.Add(sum([self.Y[i][j]*self.c[j] for j,self.Y[i][j] in enumerate(self.Y[i])]) >= d[i])
             self.cp_model.Add(sum([self.Y[i][j] * self.c[j] for j in range(len(self.Y[i]))]) >= self.d[i])
     def setup_objective(self):
         self.obj = self.cp_model.NewIntVar(1,self.N, "objective")
         self.cp_model.AddMaxEquality(self.obj, self.X)
 
+#running
 cstr = CPOrTools()
 cstr.solve()
 cstr.print_solution()
