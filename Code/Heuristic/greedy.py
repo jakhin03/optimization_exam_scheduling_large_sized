@@ -1,4 +1,4 @@
-from collections import defaultdict
+import numpy as np
 import sys
 
 def input_():
@@ -12,18 +12,24 @@ def input_():
     return N,d,M,c,K,conflicts
 def schedule_exams(N, D, M, C, conflicts):
     schedule = [(0,0,0) for _ in range(N)]
-    days = defaultdict(lambda : [[0, 0, 0, 0] for j in range(M)])
+    days = np.zeros((N, M, 4), dtype=int)
     current_day = 0
-    exclude = defaultdict(list)
+    exclude = {}
     for i,j in conflicts:
-        exclude[i].append(j)
-        exclude[j].append(i)
+        if i not in exclude:
+            exclude[i] = [j]
+        else:
+            exclude[i].append(j)
+        if j not in exclude:
+            exclude[j] = [i]
+        else:
+            exclude[j].append(i)
     
     # sắp xếp các môn thi theo số lượng đăng ký giảm dần
     exams = [(d, i) for i, d in enumerate(D)]
     exams.sort(reverse=True)
     
-    # sắp xếp các phòng thi theo sức chứa giảm dần 
+    # sắp xếp các phòng thi theo sức chứa giảm dần
     rooms = [(c, j) for j, c in enumerate(C)]
     rooms.sort(reverse=True)
 
