@@ -10,6 +10,7 @@ def input_():
     K = int(input())
     conflicts = [list(map(lambda x: int(x)-1, sys.stdin.readline().split())) for _ in range(K)] # conflicts: danh sách 2 môn thi (i,j) trùng sinh viên đăng ký 
     return N,d,M,c,K,conflicts
+    
 def greedy(N, D, M, C, conflicts):
     time_table = [(0,0,0) for _ in range(N)]
     scheduled = np.zeros((N, M, 4), dtype=int)
