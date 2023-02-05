@@ -2,18 +2,28 @@ import sys
 import time
 from ortools.sat.python import cp_model
 
+def getinput():
+    filename = input()
+    with open('I:\\HUST\\HUST-2022-1\\Toi uu hoa\\Mini Project\\Gendata\\{filename}'.format(filename=filename)) as f:
+        [N,M] = [int(x) for x in f.readline().split()]
+        d = [int(x) for x in f.readline().split()]
+        c = [int(x) for x in f.readline().split()]
+        [K] = [int(x) for x in f.readline().split()]
+        conflict = []
+        for _ in range(K):
+            conflict.append([int(x) for x in f.readline().split()])
+        return N, c, M, d, K, conflict
+N,c,M,d,K,conflict = getinput()
+
 class CPOrTools:
     def __init__(self):
-        # self.read_data(data)
         self.cp_model = cp_model.CpModel()
-        self.N = int(input())
-        self.d = [int(x) for x in sys.stdin.readline().split()]
-        self.M = int(input())
-        self.c = [int(x) for x in sys.stdin.readline().split()]
-        self.K = int(input())
-        self.conflict = []
-        for _ in range(self.K):
-            self.conflict.append([int(x) for x in sys.stdin.readline().split()])
+        self.N = N
+        self.d = d
+        self.M = M
+        self.c = c
+        self.K = K
+        self.conflict = conflict
 
     def print_solution(self):
         if self.status == cp_model.cp_model_pb2.OPTIMAL:
