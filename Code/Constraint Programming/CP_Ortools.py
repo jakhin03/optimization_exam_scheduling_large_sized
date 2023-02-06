@@ -35,7 +35,7 @@ class CPOrTools:
                     if self.solver.Value(self.Y[i][j]) == 1:
                         room = j + 1
                         break
-                print("Môn thi %2d: Kíp %d, Phòng %d" % (i + 1, self.solver.Value(self.X[i]), room))
+                print("Môn thi %d: Kíp %d, Phòng %d" % (i + 1, self.solver.Value(self.X[i]), room))
 
     def solve(self):
         start = time.time()
@@ -48,13 +48,13 @@ class CPOrTools:
         self.runtime = time.time() - start
 
     def setup_variables(self):
-        self.X = [self.cp_model.NewIntVar(1, self.N, "X[%d]" % i) for i in range(1,self.N+1)]
+        self.X = [self.cp_model.NewIntVar(1, self.N, "X[%d]" % i) for i in range(self.N)]
         self.Y = [[self.cp_model.NewIntVar(0, 1, "Y[%d][%d]" % (i, j)) for j in range(self.M)] for i in range(self.N)]
 
     def setup_constraints(self):
         #1st constraint: hai mon conflict khong xep chung mot kip
         for i in range(self.K):
-            self.cp_model.Add(self.X[self.conflict[i][0]-1] != self.X[self.conflict[i][1]-1])
+            self.cp_model.Add(self.X[self.conflict[i][0]] != self.X[self.conflict[i][1]])
 
         #2nd constraint: hai mon cung kip khong duoc chung phong
         for j in range(self.M):
@@ -77,6 +77,6 @@ class CPOrTools:
         self.cp_model.AddMaxEquality(self.obj, self.X)
 
 #running
-cstr = CPOrTools()
-cstr.solve()
-cstr.print_solution()
+schedule = CPOrTools()
+schedule.solve()
+schedule.print_solution()
