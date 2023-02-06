@@ -23,7 +23,7 @@ def input_(filename):
         return N,d,M,c,K,conflicts
 
 def greedy(N, D, M, C, conflicts):
-    time_table = [(0,0,0) for _ in range(N)]
+    time_table = np.array([(0,0,0) for _ in range(N)])
     scheduled = np.zeros((N, M, 4), dtype=int)
     cur_day = 0
     exclude = {}
@@ -34,7 +34,6 @@ def greedy(N, D, M, C, conflicts):
     # sort number of students registered for each subject in decreasing order
     exams = [(d, i) for i, d in enumerate(D)]
     exams.sort(reverse=True, key=lambda x: x[0])
-    print(len(exams))
 
     # sort capacity of rooms in decreasing order
     rooms = [(c, j) for j, c in enumerate(C)]
