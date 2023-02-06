@@ -23,7 +23,7 @@ def input_(filename):
         return N,d,M,c,K,conflicts
 
 def greedy(N, D, M, C, conflicts):
-    time_table = [(0,0,0) for _ in range(N)]
+    time_table = np.array([(0,0,0) for _ in range(N)])
     scheduled = np.zeros((N, M, 4), dtype=int)
     cur_day = 0
     exclude = {}
