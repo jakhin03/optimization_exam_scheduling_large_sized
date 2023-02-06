@@ -26,15 +26,9 @@ solver = pywraplp.Solver.CreateSolver('SCIP')
 # Variables
 #tc [i,j,h] is an array of 0-1 variables ,which will be 1 if subject i is assigned to class j in slot h
 slot = 4
-days = 10
-#tc = {}
-#for i in range(N) :
-    #for j in range(M):
-        #for h in range(slot) : 
-            #tc[i,j,h] = solver.IntVar(0, 1, "")  
-
+days = 20
 tc = [[[[solver.IntVar(0,1, 'tc({i}, {j}, {h} , {a})'.format(i=i, j=j, h=h , a=a)) for i in range(N)] for j in range(M)] for h in range(slot)] for a in range(days)]
-#y = solver.IntVar(0,N, 'y')
+
 #Constraints
 #Each subjects is choosed only once per room per slot
 for i in range(N):
@@ -46,26 +40,18 @@ for i in range(N):
             
 
 #Each room is choosed only once per slot per days
-for a in range(days):
-    
+for a in range(days):    
     for h in range(slot) :
-           
         for j in range(M):
             cstr = solver.Constraint(0,1)
             for i in range(N) :
                 cstr.SetCoefficient(tc[a][h][j][i],1)
             
 
-#Each slot is choosed only once per room per subjects
-#for h in range(slot) :
-#    solver.Add(
-#        solver.Sum([tc[i,j,h] for i in range (N) for j in range(M)]) <= 1
-#    )
-
 #2 subjects can not be assigned same day and same slot
 for conf in conflict:
     c1, c2 = conf
-    for j in range(len(M)):
+    for j in range(M):
         for h in range(slot) :
             for a in range(days) :
                 cstr = solver.Constraint(0, 1)
@@ -92,8 +78,7 @@ for i in range(N):
             for a in range(days) : 
                 objective_terms.append(tc[a][h][j][i] * a)
 
-#print(count)
-#print(objective_terms)            
+            
 solver.Minimize(solver.Sum(objective_terms))
 
 # Solve
@@ -108,7 +93,7 @@ if status == pywraplp.Solver.OPTIMAL or status == pywraplp.Solver.FEASIBLE:
                 for i in range(N) :
                     if tc[a][h][j][i].solution_value() > 0:
                         print(f'Subject {i+1} assigned to room {j+1} in slot {h+1} in day {a+1}.' )
-                        #print(tc[a][h][j][i])
+                       
 else:
     print('No solution found.')
 print(f'Time = {solver.WallTime()} ms')
