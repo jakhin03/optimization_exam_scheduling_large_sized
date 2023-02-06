@@ -34,7 +34,6 @@ def greedy(N, D, M, C, conflicts):
     # sort number of students registered for each subject in decreasing order
     exams = [(d, i) for i, d in enumerate(D)]
     exams.sort(reverse=True, key=lambda x: x[0])
-    print(len(exams))
 
     # sort capacity of rooms in decreasing order
     rooms = [(c, j) for j, c in enumerate(C)]
