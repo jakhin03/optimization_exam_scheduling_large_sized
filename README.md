@@ -20,3 +20,24 @@ Miniproject học phần tối ưu hóa HUST-20221
   + Dòng i (i = 1, ..., N): ghi 3 số nguyên i, s[i], r[i] (trong đó s[i] là kíp và r[i] là phòng mà môn i được xếp vào)
  
 ## Cấu trúc thư mục:
+.
+├── Code
+│   ├── Constraint Programming
+│   │   └── CP_Ortools.py
+│   ├── Heuristic
+│   │   ├── backtracking.py
+│   │   └── greedy.py
+│   └── Interger Programming
+│       ├── answer.py
+│       └── SCIP_Ortools.py
+├── Model
+│   ├── CP
+│   │   └── Model_CP.pdf
+│   ├── Heuristic
+│   └── IP
+├── README.md
+└── Test case
+    ├── data2.txt
+    ├── data3.txt
+    ├── data4.txt
+    └── data.txt
