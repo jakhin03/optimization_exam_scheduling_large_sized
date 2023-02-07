@@ -3,14 +3,6 @@
 import numpy as np
 import sys
 
-# def input_():
-#     [N,M] = [int(x) for x in sys.stdin.readline().split()]                                      # n: number of subjects, m number of rooms
-#     d = [int(x) for x in sys.stdin.readline().split()]                                          # d: list of number of students registered for each subject  (d[i] is number of students registerd subject i)
-#     c = [int(x) for x in sys.stdin.readline().split()]                                          # c: list of capacity of rooms (c[j] is the capacity of room j)
-#     K = int(input())
-#     conflicts = [list(map(lambda x: int(x)-1, sys.stdin.readline().split())) for _ in range(K)] # conflicts: list of 2 non-conflicting subjects (i,j)
-#     return N,d,M,c,K,conflicts
-
 def input_(filename):
     with open(filename) as f:
         input_list = f.readlines()
@@ -58,7 +50,7 @@ def greedy(N, D, M, C, conflicts):
                         continue
                     scheduled[cur_day][j][k] += d
                     time_table[i] = (cur_day, j, k)
-                    print(f"Subject {i+1} is scheduled at day {cur_day+1}, room {j+1}, shift {k+1}")
+                    # print(f"Subject {i+1} is scheduled at day {cur_day+1}, room {j+1}, shift {k+1}") debug
                     break
             else:
                 continue
@@ -74,8 +66,8 @@ def greedy(N, D, M, C, conflicts):
 def main():
     n,d,m,c,k,conflicts = input_(input())
     num_days, time_table = greedy(n,d,m,c, conflicts)
-    # for exam, (i,j,k) in enumerate(time_table):
-    #     print(f"Subject {exam+1} is assigned at day {i+1}, room {j+1}, and shift {k+1}")
+    for exam, (i,j,k) in enumerate(time_table):
+        print(f"Subject {exam+1} is assigned at day {i+1}, room {j+1}, and shift {k+1}")
     print(f"Minimum days for the exams: {num_days}")
 
 if __name__ == "__main__":
