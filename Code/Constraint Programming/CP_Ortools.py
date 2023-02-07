@@ -4,7 +4,7 @@ from ortools.sat.python import cp_model
 
 def getinput():
     filename = input()
-    with open('I:\\HUST\\HUST-2022-1\\Toi uu hoa\\Mini Project\\Gendata\\{filename}'.format(filename=filename)) as f:
+    with open(filename) as f:
         [N] = [int(x) for x in f.readline().split()]
         d = [int(x) for x in f.readline().split()]
         [M] = [int(x) for x in f.readline().split()]
