@@ -40,7 +40,9 @@ def greedy(N, D, M, C, conflicts):
     rooms.sort(reverse=True, key=lambda x: x[0])
 
     # assign subject to earliest available shift
-    for exam in exams:
+    scheduled_subs = 0
+    while scheduled_subs < len(exams):
+        exam = exams[scheduled_subs]
         d, i = exam
         for room in rooms:
             c, j = room
@@ -63,6 +65,8 @@ def greedy(N, D, M, C, conflicts):
             break
         else:
             cur_day += 1
+            scheduled_subs -=1
+        scheduled_subs += 1
             
     # return the minimum days for the exam
     return cur_day + 1, time_table
