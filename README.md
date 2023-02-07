@@ -20,7 +20,7 @@ Miniproject học phần tối ưu hóa HUST-20221
   + Dòng i (i = 1, ..., N): ghi 3 số nguyên i, s[i], r[i] (trong đó s[i] là kíp và r[i] là phòng mà môn i được xếp vào)
  
 ## Cấu trúc thư mục:
-```
+<p>
 .
 ├── Code
 │   ├── Constraint Programming
@@ -42,4 +42,4 @@ Miniproject học phần tối ưu hóa HUST-20221
     ├── data3.txt
     ├── data4.txt
     └── data.txt
-```
+</p>
