@@ -39,7 +39,7 @@ def greedy(N, D, M, C, conflicts):
     rooms = [(c, j) for j, c in enumerate(C)]
     rooms.sort(reverse=True, key=lambda x: x[0])
 
-    # assign subject to earliest available period
+    # assign subject to earliest available shift
     for exam in exams:
         d, i = exam
         for room in rooms:
@@ -56,7 +56,7 @@ def greedy(N, D, M, C, conflicts):
                         continue
                     scheduled[cur_day][j][k] += d
                     time_table[i] = (cur_day, j, k)
-                    # print(f"Subject {i+1} is scheduled at day {cur_day+1}, room {j+1}, period {k+1}") debug
+                    print(f"Subject {i+1} is scheduled at day {cur_day+1}, room {j+1}, shift {k+1}")
                     break
             else:
                 continue
@@ -70,8 +70,8 @@ def greedy(N, D, M, C, conflicts):
 def main():
     n,d,m,c,k,conflicts = input_(input())
     num_days, time_table = greedy(n,d,m,c, conflicts)
-    for exam, (i,j,k) in enumerate(time_table):
-        print(f"Subject {exam+1} is assigned at day {i+1}, room {j+1}, and period {k+1}")
+    # for exam, (i,j,k) in enumerate(time_table):
+    #     print(f"Subject {exam+1} is assigned at day {i+1}, room {j+1}, and shift {k+1}")
     print(f"Minimum days for the exams: {num_days}")
 
 if __name__ == "__main__":
