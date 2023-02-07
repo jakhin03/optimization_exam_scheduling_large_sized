@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 
 import numpy as np
-import sys
 
 def input_(filename):
     with open(filename) as f:
         input_list = f.readlines()
-        N = int(input_list[0])                                          # n: number of subjects, m number of rooms
-        d = [int(x) for x in input_list[1].strip().split()]             # n: number of subjects, m number of rooms
-        M = int(input_list[2])                                          # d: list of number of students registered for each subject  (d[i] is number of students registerd subject i)
-        c = [int(x) for x in input_list[3].strip().split()]             # c: list of capacity of rooms (c[j] is the capacity of room j)
-        K = int(input_list[4])                                          # k: number of conflicting pair
-        conflicts = [list(map(lambda x: int(x) - 1, ij.split())) for ij in input_list[5:]]    # conflicts: list of 2 conflicting subjects (i,j)
+        N = int(input_list[0])                                          
+        d = [int(x) for x in input_list[1].strip().split()]             
+        M = int(input_list[2])                                         
+        c = [int(x) for x in input_list[3].strip().split()]            
+        K = int(input_list[4])                                         
+        conflicts = [list(map(lambda x: int(x) - 1, ij.split())) for ij in input_list[5:]]   
         return N,d,M,c,K,conflicts
 
 def greedy(N, D, M, C, conflicts):
@@ -22,43 +21,43 @@ def greedy(N, D, M, C, conflicts):
     for i,j in conflicts:
         exclude[i] = exclude.get(i, []) + [j]
         exclude[j] = exclude.get(j, []) + [i]
-
-    # sort number of students registered for each subject in decreasing order
     exams = [(d, i) for i, d in enumerate(D)]
+    rooms = [(c, j) for j, c in enumerate(C)]
+    
+    # sort number of students registered for each subject in decreasing order
     exams.sort(reverse=True, key=lambda x: x[0])
 
     # sort capacity of rooms in decreasing order
-    rooms = [(c, j) for j, c in enumerate(C)]
-    rooms.sort(reverse=True, key=lambda x: x[0])
+     rooms.sort(reverse=True, key=lambda x: x[0])
 
-    # assign subject to earliest available shift
-    scheduled_subs = 0
-    while scheduled_subs < len(exams):
-        exam = exams[scheduled_subs]
-        d, i = exam
-        for room in rooms:
-            c, j = room
-            for k in range(4):
-                if (scheduled[cur_day][j][k] + d <= c) and (scheduled[cur_day][j][k] == 0):
-                    # check if there is another subject registered or full of capacity of room
-                    conflict = False
-                    for ii in range(i):
-                        if (time_table[ii][0] == cur_day and time_table[ii][2] == k) and ((ii in exclude.get(i, [])) or time_table[ii][1] == j ):
-                            conflict = True
-                            break
-                    if conflict:
-                        continue
-                    scheduled[cur_day][j][k] += d
-                    time_table[i] = (cur_day, j, k)
-                    # print(f"Subject {i+1} is scheduled at day {cur_day+1}, room {j+1}, shift {k+1}") debug
-                    break
-            else:
-                continue
-            break
+# looping through each subject and assigning it to the earliest available shift in the first available room with enough capacity.
+scheduled_subs = 0
+while scheduled_subs < len(exams):
+    exam = exams[scheduled_subs]
+    d, i = exam
+    for room in rooms:
+        c, j = room
+        for k in range(4):
+            if (scheduled[cur_day][j][k] + d <= c) and (scheduled[cur_day][j][k] == 0):
+                # check if there is another subject registered or full of capacity of room
+                conflict = False
+                for ii in range(i):
+                    if (time_table[ii][0] == cur_day and time_table[ii][2] == k) and ((ii in exclude.get(i, [])) or time_table[ii][1] == j ): # check if there is another subject registered or conflict
+                        conflict = True
+                        break
+                if conflict:
+                    continue
+                scheduled[cur_day][j][k] += d
+                time_table[i] = (cur_day, j, k)
+                break
         else:
-            cur_day += 1
-            scheduled_subs -=1
-        scheduled_subs += 1
+            continue
+        break
+    else:
+        #If there is no room left in the last period, increasing the current day by 1
+        cur_day += 1
+        scheduled_subs -=1
+    scheduled_subs += 1
             
     # return the minimum days for the exam
     return cur_day + 1, time_table
