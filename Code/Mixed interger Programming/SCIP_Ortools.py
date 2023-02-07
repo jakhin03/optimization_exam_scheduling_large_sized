@@ -14,7 +14,7 @@ def getinput():
         [K] = [int(x) for x in f.readline().split()]
         conflict = []
         for _ in range(K):
-            conflict.append([int(x) for x in f.readline().split()])
+            conflict.append([int(x)-1 for x in f.readline().split()])
         return N, c, M, d, K, conflict
 N,c,M,d,K,conflict = getinput()
 
