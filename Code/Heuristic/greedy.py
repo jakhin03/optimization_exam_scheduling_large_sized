@@ -11,7 +11,7 @@ def input_(filename):
         c = [int(x) for x in input_list[3].strip().split()]            
         K = int(input_list[4])                                         
         conflicts = [list(map(lambda x: int(x) - 1, ij.split())) for ij in input_list[5:]]   
-        return N,d,M,c,K,conflicts
+    return N,d,M,c,K,conflicts
 
 def greedy(N, D, M, C, conflicts):
     time_table = np.array([(0,0,0) for _ in range(N)])
