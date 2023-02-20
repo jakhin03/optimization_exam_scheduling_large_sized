@@ -66,7 +66,7 @@ def main():
     n,d,m,c,k,conflicts = input_(input())
     num_days, time_table = greedy(n,d,m,c, conflicts)
     for exam, (i,j,k) in enumerate(time_table):
-        print(f"Subject {exam+1} is assigned at day {i+1}, room {j+1}, and shift {k+1}")
+        print(f"{exam+1} {i+1} {j+1} {k+1}")
     print(f"Minimum days for the exams: {num_days}")
 
 if __name__ == "__main__":
