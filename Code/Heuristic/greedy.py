@@ -1,21 +1,16 @@
-#!/usr/bin/python3
+import sys
 
-import numpy as np
-
-def input_(filename):
-    with open(filename) as f:
-        input_list = f.readlines()
-        N = int(input_list[0])                                          
-        d = [int(x) for x in input_list[1].strip().split()]             
-        M = int(input_list[2])                                         
-        c = [int(x) for x in input_list[3].strip().split()]            
-        K = int(input_list[4])                                         
-        conflicts = [list(map(lambda x: int(x) - 1, ij.split())) for ij in input_list[5:]]   
+def input_():
+    [N,M] = [int(x) for x in sys.stdin.readline().split()]
+    d = [int(x) for x in sys.stdin.readline().split()]
+    c = [int(x) for x in sys.stdin.readline().split()]
+    K = int(input())
+    conflicts = [list(map(lambda x: int(x)-1, sys.stdin.readline().split())) for _ in range(K)]
     return N,d,M,c,K,conflicts
 
 def greedy(N, D, M, C, conflicts):
-    time_table = np.array([(0,0,0) for _ in range(N)])
-    scheduled = np.zeros((N, M, 4), dtype=int)
+    time_table = [(0,0,0) for _ in range(N)]
+    scheduled = [[[0, 0, 0, 0] for _ in range(M)] for _ in range(N)]
     cur_day = 0
     exclude = {}
     for i,j in conflicts:
@@ -63,11 +58,10 @@ def greedy(N, D, M, C, conflicts):
     return cur_day + 1, time_table
 
 def main():
-    n,d,m,c,k,conflicts = input_(input())
+    n,d,m,c,k,conflicts = input_()
     num_days, time_table = greedy(n,d,m,c, conflicts)
     for exam, (i,j,k) in enumerate(time_table):
-        print(f"{exam+1} {i+1} {j+1} {k+1}")
-    print(f"Minimum days for the exams: {num_days}")
+        print(exam+1, k+1, j+1)
 
 if __name__ == "__main__":
   main()
